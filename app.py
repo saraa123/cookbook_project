@@ -8,10 +8,7 @@ app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'Cookbook'
 app.config["MONGO_URI"] = os.environ.get('MONGO_URI', 'mongodb://localhost')
 
-
 mongo = PyMongo(app)
-
-app.secrey.key=("SECRET")
 
 @app.route('/')
 @app.route('/get_tasks')
