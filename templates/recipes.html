@@ -1,11 +1,37 @@
-<!DOCTYPE html>
-<html>
-    <head>
-    </head>
-    <body>
-        {% for recipe in recipes %}
-            {{recipe.cuisine_name}}
-            {{recipe.recipe}}
-        {% endfor %}
-    </body>
-</html>
+{% extends 'base.html' %} {% block content %} 
+
+
+<div class='row'>
+    <ul class="collapsible" data-collapsible="accordion">
+    {% for recipe in recipes %}
+        <li>
+            <div class="collapsible-header">
+                <div class=" task_header col s3">
+                    <i class="material-icons">expand_more</i>
+                    <a href ="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">delete</a>
+                    <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">edit</a>
+                </div>
+                
+                <div class="col s9">
+                    {{recipe.recipe_name}}
+                </div>
+                
+            </div>
+            
+            <div class="collapsible-body">
+                <span>
+                    Author: {{recipe.author_name}} <br>
+                    Cuisine: {{recipe.cuisine_name}}<br>
+                    {{recipe.recipe_category}} <br>
+                    Ingredients: {{recipe.ingredient_name}}
+                        <ul class="collection">
+                          <li class="collection-item">{{recipe.ingredient_name}}</li>
+                        </ul>
+                </span>
+            </div>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
+
