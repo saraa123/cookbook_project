@@ -17,6 +17,18 @@
         
         <div class="row">
             <div class="input-field col s12">
+                <select id="recipe_type_select" name="recipe_type">
+                  <option value="" disabled selected>Choose your Recipe Type</option>
+                  {% for type in recipeType %}
+                      <option value="{{type.recipe_type}}">{{type.recipe_type}}</option>
+                  {% endfor %}
+                </select>
+                <label>Recipe Category</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
                 <i class="material-icons prefix">add_box</i>
                 <input id="recipe_name" name="recipe_name" type="text" class="validate">
                 <label for="recipe_name">Recipe Name</label>
@@ -41,6 +53,13 @@
                 <i class="material-icons prefix">subject</i>
                 <textarea id="author" name="author_name" type="textarea" class="materialize-textarea"></textarea>
                 <label for="author">Recipe Author</label> 
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">subject</i>
+                <textarea id="method" name="recipe_method" type="textarea" class="materialize-textarea"></textarea>
+                <label for="method">Recipe Method</label> 
             </div>
         </div>
         <div class="row">
