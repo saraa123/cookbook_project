@@ -1,0 +1,136 @@
+{% extends 'base.html' %} {% block content %} 
+
+<div class='container'>
+    <h3>Edit a Recipe</h3>
+    <div class="row">
+        <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="col s12">
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="recipe_category_select" name="recipe_category">
+                      <option value="" disabled selected>Choose your Recipe's Main Ingredient</option>
+                      {% for category in foodCategory %}
+                      <!-- if category selected equals category in the recipe -->
+                        {% if category.recipe_category == recipe.recipe_category %} 
+                            <option value="{{category.recipe_category}}" selected >{{category.recipe_category|title}}</option>
+                        {% else %}
+                            <option value="{{category.recipe_category}}">{{category.recipe_category|title}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Main Ingredient</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="recipe_type_select" name="recipe_type">
+                      <option value="" disabled selected>Choose your Recipe Type</option>
+                      {% for type in recipeType %}
+                        {% if type.recipe_type == recipe.recipe_type %}
+                            <option value="{{type.recipe_type}}" selected >{{type.recipe_type}}</option>
+                        {% else %}
+                            <option value="{{type.recipe_type}}">{{type.recipe_type}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Recipe Type</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="special_requirement" name="special_requirement">
+                      <option value="" disabled selected>Allergens</option>
+                      {% for special in specialReq %}
+                        {% if special.special_requirement == recipe.special_requirement %}
+                            <option value="{{special.special_requirement}}" selected >{{special.special_requirement|title}}</option>
+                        {% else %}
+                            <option value="{{special.special_requirement}}">{{special.special_requirement|title}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Allergens</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <select id="rating_select" name="rating">
+                      <option value="" disabled selected>Rate your Recipe (1 lowest - 5 highest)</option>
+                      {% for rating in rating %}
+                        {% if rating.rating == recipe.rating %}
+                            <option value="{{rating.rating}}" selected >{{rating.rating}}</option>
+                        {% else %}
+                            <option value="{{rating.rating}}">{{rating.rating}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Recipe rating</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">attach_file</i>
+                    <textarea id="Image" name="recipe_url" type="textarea" class="materialize-textarea">{{recipe.recipe_url}}</textarea>
+                    <!--<input type="image" name="image" value='{{recipe.recipe_url}}'>-->
+                    <label for="author">Recipe Image</label> 
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">add_box</i>
+                    <input id="recipe_name" name="recipe_name" type="text" class="validate" value="{{recipe.recipe_name|title}}">
+                    <label for="recipe_name">Recipe Name</label>
+                </div> 
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">subject</i>
+                    <textarea id="cuisine" name="cuisine_name" type="textarea" class="materialize-textarea">{{recipe.cuisine_name}}</textarea>
+                    <label for="cuisine">Recipe Cuisine</label> 
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">subject</i>
+                    <textarea id="author" name="author_name" type="textarea" class="materialize-textarea">{{recipe.author_name|title}}</textarea>
+                    <label for="author">Recipe Author</label> 
+                </div>
+            </div>
+            
+            <div id="dynamicInput">
+                {% for i in recipe.ingredient_name %}
+                Ingredient 1 and amount<br><input type="text" name="ingredient_name" value='{{i}}'>
+                {% endfor %}
+            <br>
+            </div>
+            <input type="button" value="Add another ingredient" onClick="addInput('dynamicInput');"><br>
+            <br>
+            
+            
+            <div id="dynamicInputMethod">
+                {% for m in recipe.recipe_method %}
+                
+                Method 1<br><input type="text" name="recipe_method" value="{{m}}">
+                {% endfor %}
+            <br>
+            </div>
+            <input type="button" value="Add another method" onClick="addInputMethod('dynamicInputMethod');"><br>
+            <br>
+            
+            <div class="row">
+                <button class="btn waves-effect waves-light" type="submit" name="add_recipe_select">Edit Recipe
+                    <i class="material-icons right">playlist_add</i>
+                </button>
+            </div>
+            
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="/static/js/addInput.js"></script>
+
+{% endblock %}
