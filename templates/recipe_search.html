@@ -2,11 +2,8 @@
 
 <div class='container'>
     <div class="row">
-        <!--<div class="col s12 m6">-->
-        <!--    <a href ="{{url_for('get_recipe')}}"><h3>All Recipes</h3></a>-->
-        <!--</div>-->
         <div class="col s12 m6">
-            <a href ="{{url_for('search')}}"><h3>Search Recipes</h3></a> <!--Change url for search function -->
+            <h3>Search Recipes</h3>
         </div>
     </div>
 </div>
@@ -86,17 +83,26 @@
 <!-- recipe_type results -->
 
 {% if results %}
-
+    
     <div class='container'>
         <div class='row'>
             <div class='col s12 m12'>
-                <p>{{count}} recipe(s) found</p>
+                
+                {% if count == 0 %}
+                    <p>No results found</p>
+                {% elif count == 1 %}
+                    <p>{{count}} recipe available</p>
+                {% else %}
+                    <p>{{count}} recipes available</p>
+                {% endif %}
+                
             </div>
         </div>
     </div>
     
     <div class='container'>
         <div class='row'>
+            
             <ul class="collapsible col s12 m12" data-collapsible="accordion">
                 {% for recipe in results %}
                     <li>
@@ -106,7 +112,7 @@
                         <div class="collapsible-body">
                             <p>by {{recipe.author_name|title}}</p>
                             <p>{{recipe.cuisine_name}}</p>
-                            <p>Ingredients:</p><br>
+                            <p>Ingredients:</p>
                             {% for ingredient in recipe.ingredient_name %} 
                                 <ul class="collection">
                                     <li class="collection-item">{{ingredient}}{% if loop.index<loop.length %}, {% endif %}</li>
@@ -133,10 +139,19 @@
 
 <br>
 {% if category_results %}
+    
     <div class='container'>
         <div class='row'>
             <div class='col s12 m12'>
-                <p>{{category_count}} recipe(s) found</p>
+                
+                {% if category_count == 0 %}
+                    <p>No results found</p>
+                {% elif category_count == 1 %}
+                    <p>{{category_count}} recipe available</p>
+                {% else %}
+                    <p>{{category_count}} recipes available</p>
+                {% endif %}
+                
             </div>
         </div>
     </div>
@@ -174,7 +189,7 @@
     </div>
 {% endif %}
 
-<!-- special requirements results -->
+<!-- allergen results -->
 <br>
 {% if special_results %}
     
@@ -182,6 +197,22 @@
         <div class='row'>
             <div class='col s12 m12'>
                 <p>{{special_count}} recipe(s) found</p>
+            </div>
+        </div>
+    </div>
+    
+    <div class='container'>
+        <div class='row'>
+            <div class='col s12 m12'>
+                
+                {% if special_count == 0 %}
+                    <p>No results found</p>
+                {% elif special_count == 1 %}
+                    <p>{{special_count}} recipe available</p>
+                {% else %}
+                    <p>{{special_count}} recipes available</p>
+                {% endif %}
+                
             </div>
         </div>
     </div>
