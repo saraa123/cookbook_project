@@ -1,0 +1,93 @@
+{% extends 'base.html' %} {% block content %} 
+
+
+<div class='container'>
+    <div class='row'>
+        <div class='col s12 m12 l12'>
+            <h3>Welcome to your online cookbook!</h3>
+            <p>View all your recipes in one place, with the highest rated automatically shown first. Search recipes to find exactly what you’re looking for.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class='container'>
+    <div class='row'>
+        <div class='col s12 m12'>
+            {% if count == 0 %}
+                <p>No recipes available</p>
+            {% elif count == 1 %}
+                <p>{{count}} recipe available</p>
+            {% else %}
+                <p>You have a total of {{count}} recipes available</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+ 
+<div class='container'>
+    <div class='row'>
+        <ul class="collapsible col s12 m12" data-collapsible="accordion">
+        {% for recipe in recipes %}
+        
+           <li>
+                <div class="collapsible-header">
+                    <div class='row flex_container'>
+                        <div class='col s12 m6 flex'>
+                            <p class='index_recipes'>{{recipe.recipe_name|title}}<br>
+                            {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                            
+                            {% if recipe.special_requirement == None %}
+                                
+                            {% else %}
+                                {{recipe.special_requirement|title}}<br>
+                            {% endif %}
+                            {{recipe.info}}</p>
+
+                        </div>
+                        <div class='col s12 m6 flex'>
+                            <img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="collapsible-body">
+                    <span>
+                        {{recipe.recipe_name|title}}
+                        {% if author %} <!--change this code --> 
+                            <br>by {{recipe.author_name|title}}<br>
+                        {% endif %} 
+                         
+                        <br>Ingredients<br>
+                        
+                        {% for i in recipe.ingredient_name %}
+                            <ul class='collection'>
+                                <li class='collection-item'>{{i}}</li>
+                            </ul>
+                        {% endfor %}
+                        
+                        
+                        <br>Recipe Method<br>
+                        {% for method in recipe.recipe_method %}
+                        <ol class='collection'>
+                            <li class='collection-item'>{{method}}</li>
+                        </ol>
+                        {% endfor %}
+                        
+
+                        <div>
+                            <a href ="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">delete</a>
+                            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">edit</a>
+                        </div>
+                    </span>
+                </div>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+</div>
+
+
+{% endblock %}
+
