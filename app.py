@@ -42,10 +42,8 @@ def insert_recipe():
     recipes = mongo.db.recipes
     
     # ------------- ingredients list -----------------------------
-    new_ing = request.form
+    new_ing = request.form.to_dict()
     ingredients_list = [ ]
-    ingredients_list_obj = OrderedDict(ingredients_list)
-    
     
     
     for key, value in new_ing.items():
@@ -53,8 +51,7 @@ def insert_recipe():
         
         if 'ingredient_' in key:
             ingredients_list.append(value)
-            print ("empty orderedDict", ingredients_list_obj)
-            # print(ingredients_list)
+    
             print (sorted(list(ingredients_list)))
             
         
@@ -86,15 +83,16 @@ def insert_recipe():
     if 'add_recipe' in request.form:
         recipes.insert_one({
         'recipe_name':request.form.get('recipe_name'),
-        'ingredient_name':ingredients_list,
+        'ingredient_name':sorted(list(ingredients_list)),
         'cuisine_name':request.form.get('cuisine_name'),
         'author_name':request.form.get('author_name'),
-        'recipe_method': methods_list,
+        'recipe_method': sorted(list(methods_list)),
         'recipe_type': request.form.get('recipe_type'),
         'rating': request.form.get('rating'),
         'recipe_category': request.form.get('recipe_category'),
         'special_requirement': request.form.get('special_requirement'),
-        'recipe_url': request.form.get('recipe_url')
+        'recipe_url': request.form.get('recipe_url'),
+        'delete_recipe':request.form.get('delete_recipe')
     })
     elif 'cancel_add_recipe' in request.form:
         return redirect(url_for('get_recipe'))
@@ -122,17 +120,29 @@ def update_recipe(recipe_id):
     
     # --------------- ingredients array ---------------------------
     
-    new_recipe = request.form.to_dict()
-    # ingredients=new_recipe['ingredient_name']
-    ingredients_list=[]
+    new_ing = request.form.to_dict()
+    ingredients_list = [ ]
     
-    for key, value in new_recipe.items():
-        print(key, '----->', value)
-        
+    
+    for key, value in new_ing.items():
+        print(key, "----->", value)
         
         if 'ingredient_' in key:
             ingredients_list.append(value)
-            print (ingredients_list)
+            
+            print (sorted(list(ingredients_list)))
+    
+    # new_recipe = request.form.to_dict()
+    # # ingredients=new_recipe['ingredient_name']
+    # ingredients_list=[]
+    
+    # for key, value in new_recipe.items():
+    #     print(key, '----->', value)
+        
+        
+    #     if 'ingredient_' in key:
+    #         ingredients_list.append(value)
+    #         print (ingredients_list)
     
      
     
@@ -162,10 +172,10 @@ def update_recipe(recipe_id):
     recipes.update({'_id': ObjectId(recipe_id)},
     {
         'recipe_name':request.form.get('recipe_name'),
-        'ingredient_name':ingredients_list,
+        'ingredient_name':sorted(list(ingredients_list)),
         'cuisine_name':request.form.get('cuisine_name'),
         'author_name':request.form.get('author_name'),
-        'recipe_method': methods_list,
+        'recipe_method': sorted(list(methods_list)),
         'recipe_type': request.form.get('recipe_type'),
         'rating': request.form.get('rating'),
         'recipe_category': request.form.get('recipe_category'),
@@ -176,6 +186,7 @@ def update_recipe(recipe_id):
     
 @app.route('/delete_recipe/<recipe_id>')
 def delete_recipe(recipe_id):
+    
     mongo.db.recipes.remove({'_id': ObjectId(recipe_id)})
     return redirect(url_for('get_recipe'))
 
