@@ -4,6 +4,7 @@
     <h3>Edit a Recipe</h3>
     <div class="row">
         <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST" class="col s12">
+            <input id="delete_recipe" name="delete_recipe" type="hidden" value="{{recipe.delete_recipe}}">
             <div class="row">
                 <div class="input-field col s12">
                     <select id="recipe_category_select" name="recipe_category">
@@ -74,7 +75,7 @@
                     <i class="material-icons prefix">attach_file</i>
                     <textarea id="Image" name="recipe_url" type="textarea" class="materialize-textarea">{{recipe.recipe_url}}</textarea>
                     <!--<input type="image" name="image" value='{{recipe.recipe_url}}'>-->
-                    <label for="author">Recipe Image</label> 
+                    <label for="recipe_url">Recipe Image</label> 
                 </div>
             </div>
             
@@ -93,6 +94,7 @@
                     <label for="cuisine">Recipe Cuisine</label> 
                 </div>
             </div>
+            
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">subject</i>
@@ -102,23 +104,21 @@
             </div>
             
             <div id="dynamicInput">
-                {% for i in recipe.ingredient_name %}
-                Ingredient 1 and amount<br><input type="text" name="ingredient_name" value='{{i}}'>
+                {% for ing in recipe.ingredient_name %}
+                Ingredient {{ loop.index }} and amount<br><input type="text" class='ingredient' name="ingredient_name" value='{{ing}}'>
                 {% endfor %}
             <br>
             </div>
-            <input type="button" value="Add another ingredient" onClick="addInput('dynamicInput');"><br>
+            <input type="button" value="Add another ingredient" id="addIngredient"><br>
             <br>
             
-            
-            <div id="dynamicInputMethod">
-                {% for m in recipe.recipe_method %}
-                
-                Method 1<br><input type="text" name="recipe_method" value="{{m}}">
+            <div id="dynamicInput">
+                {% for method in recipe.recipe_method %}
+                Method {{ loop.index }}<br><input type="text" name="recipe_method" value="{{method}}">
                 {% endfor %}
             <br>
             </div>
-            <input type="button" value="Add another method" onClick="addInputMethod('dynamicInputMethod');"><br>
+            <input type="button" value="Add another method" id="addMethod"><br>
             <br>
             
             <div class="row">
@@ -126,11 +126,11 @@
                     <i class="material-icons right">playlist_add</i>
                 </button>
             </div>
-            
         </form>
     </div>
 </div>
 
 <script type="text/javascript" src="/static/js/addInput.js"></script>
+
 
 {% endblock %}
