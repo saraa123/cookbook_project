@@ -105,7 +105,7 @@
             
             <div id="dynamicInput">
                 {% for ing in recipe.ingredient_name %}
-                Ingredient {{ loop.index }} and amount<br><input type="text" class='ingredient' name="ingredient_name" value='{{ing}}'>
+                Ingredient {{ loop.index }} and amount<br><input type="text" class='ingredient' name="ingredient_{{ loop.index }}_name" value='{{ing}}'>
                 {% endfor %}
             <br>
             </div>
