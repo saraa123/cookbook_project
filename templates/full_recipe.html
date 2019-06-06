@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='container wide_container'>
+    <form action="{{ url_for('full_recipe', recipe_id=recipe._id) }}" method="GET" class="col s12">
+        <h3>{{recipe.recipe_name}}</h3>
+        <div class='row'>
+            <div class='col s12 m6'>
+                <p class='index_recipes'>
+                by {{recipe.author_name|title}}<br>
+                {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                
+                {% if recipe.special_requirement == None %}
+                    
+                {% else %}
+                    {{recipe.special_requirement|title}}<br>
+                {% endif %}
+                {{recipe.info}}</p>
+            </div>
+            <div class='col s12 m6 flex'>
+                <img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img>
+            </div>
+            
+        </div>
+        
+       <div class="row">
+            <div class="col s12">
+                            
+                <br>Ingredients<br>
+                
+                {% for ing_name in recipe.ingredient_name %}
+                    <ul class='collection'>
+                        <li class='collection-item'>{{ ing_name }}</li>
+                    </ul>
+                {% endfor %}
+                
+                <br>Recipe Method<br>
+                {% for method in recipe.recipe_method %}
+                <ol class='collection'>
+                    <li class='collection-item'>{{method}}</li>
+                </ol>
+                {% endfor %}
+            </div> 
+        </div>
+        
+    </form>
+</div>
+
+{% endblock %}
