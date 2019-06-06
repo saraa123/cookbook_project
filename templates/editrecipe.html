@@ -103,6 +103,14 @@
                 </div>
             </div>
             
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">subject</i>
+                    <textarea id="recipe_info" name="recipe_info" type="textarea" class="materialize-textarea">{{recipe.recipe_info}}</textarea>
+                    <label for="recipe_info">Recipe Description</label> 
+                </div>
+            </div>
+            
             <div id="dynamicInput">
                 {% for ing in recipe.ingredient_name %}
                 Ingredient {{ loop.index }} and amount<br><input type="text" class='ingredient' name="ingredient_{{ loop.index }}_name" value='{{ing}}'>
