@@ -30,10 +30,10 @@
 
 <div class='container'>
     <div class='row'>
-        
+        <p class='recipe_heading'>Your permanent recipes</p>
         {% for recipe in non_delete_recipe %}
         
-            <div class='row '>
+            <div class='row'>
                 <div class='col s12 m6'>
                     <p class='index_recipes'>
                     {{recipe.recipe_name|title}}<br>
@@ -43,7 +43,7 @@
                     {% else %}
                         {{recipe.special_requirement|title}}<br>
                     {% endif %}
-                    {{recipe.info}}</p>
+                    {{recipe.recipe_info|capitalize}}</p>
                 </div>
                 
                 <div class='col s12 m6'>
@@ -60,32 +60,27 @@
  
 <div class='container'>
     <div class='row'>
-        
+        <p class='recipe_heading'>Recipes you're free to delete</p>
         {% for recipe in delete_recipe %}
-        
-            <div class="collapsible-header">
-                <div class='row flex_container'>
-                    <div class='col s12 m6 flex'>
+            
+            <div class='row'>
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
                         
-                        <p class='index_recipes'>{{recipe.recipe_name|title}}
-                        <br>
-                        {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon>
-                        <br>
-                        {% if recipe.special_requirement == None %}
-                            
-                        {% else %}
-                            {{recipe.special_requirement|title}}<br>
-                        {% endif %}
-                        <br>
-                        {{recipe.recipe_info|capitalize}}</p>
-                    </div>
-                    
-                    <div class='col s12 m6 flex'>
-                        <!--make if statement to show picture only if one is given-->
-                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
-                    </div>
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
                 </div>
             </div>
+            
         {% endfor %}
     </div>
 </div>
