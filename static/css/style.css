@@ -91,17 +91,12 @@ a.brand-logo {
 }
 
 
-.permanent_recipes {
+.recipe_heading {
     text-align: center;
     font-style: italic;
     font-size: 20px;
 }
 
-.delete_recipes {
-    text-align: center;
-    font-style: italic;
-    font-size: 20px;
-}
 
 .image_position {
 	display: inline-block;
