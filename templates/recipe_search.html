@@ -98,34 +98,23 @@
     
     <div class='container'>
         <div class='row'>
-            
-            <ul class="collapsible col s12 m12" data-collapsible="accordion">
-                {% for recipe in results %}
-                    <li>
-                        <div class='collapsible-header'>
-                            <p>{{recipe.recipe_name|title}}</p>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>by {{recipe.author_name|title}}</p>
-                            <p>{{recipe.cuisine_name}}</p>
-                            <p>Ingredients:</p>
-                            {% for ingredient in recipe.ingredient_name %} 
-                                <ul class="collection">
-                                    <li class="collection-item">{{ingredient}}{% if loop.index<loop.length %}, {% endif %}</li>
-                                </ul>
-                            {% endfor %}</p> 
-                            
-                            <p>Method:</p>
-                            {% for method in recipe.recipe_method %}
-                                <ul class='collection'>
-                                    <li class='collection-item'>{{method}}</li>
-                                </ul>
-                            {% endfor %}
-                            <br>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for recipe in results %}
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endif %}
@@ -133,7 +122,6 @@
 
 <!-- category results -->
 
-<br>
 {% if category_results %}
     
     <div class='container'>
@@ -154,39 +142,29 @@
 
     <div class='container'>
         <div class='row'>
-            <ul class="collapsible col s12 m12" data-collapsible="accordion">
-                {% for category in category_results %}
-                    <li>
-                        <div class='collapsible-header'>
-                            <p>{{category.recipe_name|title}}</p>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>by {{category.author_name|title}}</p>
-                            <p>{{category.cuisine_name}}</p>
-                            <p>Ingredients:</p><br>
-                            {% for ingredient in category.ingredient_name %} 
-                                <ul class="collection">
-                                    <li class="collection-item">{{ingredient}}{% if loop.index<loop.length %}, {% endif %}</li>
-                                </ul>
-                            {% endfor %}</p> 
-                            
-                            <p>Method:</p>
-                            {% for method in category.recipe_method %}
-                                <ul class='collection'>
-                                    <li class='collection-item'>{{method}}</li>
-                                </ul>
-                            {% endfor %}
-                            <br>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for recipe in category_results %}
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endif %}
 
 <!-- allergen results -->
-<br>
+
 {% if special_results %}
     
     <div class='container'>
@@ -204,42 +182,33 @@
             </div>
         </div>
     </div>
-
+    
     <div class='container'>
         <div class='row'>
-            <ul class="collapsible col s12 m12" data-collapsible="accordion">
-                {% for special_result in special_results %}
-                    <li>
-                        <div class='collapsible-header'>
-                            <p>{{special_result.recipe_name|title}}</p>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>by {{special_result.author_name|title}}</p>
-                            <p>{{special_result.cuisine_name}}</p>
-                            <p>Ingredients:</p><br>
-                            {% for ingredient in special_result.ingredient_name %} 
-                                <ul class="collection">
-                                    <li class="collection-item">{{ingredient}}{% if loop.index<loop.length %}, {% endif %}</li>
-                                </ul>
-                            {% endfor %}</p> 
-                            
-                            <p>Method:</p>
-                            {% for method in special_result.recipe_method %}
-                                <ul class='collection'>
-                                    <li class='collection-item'>{{method}}</li>
-                                </ul>
-                            {% endfor %}
-                            <br>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for recipe in special_results %}
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            {% endfor %}
         </div>
     </div>
+    
 {% endif %}
 
 <!-- cuisine results -->
-<br>
+
 {% if cuisine_results %}
     
     <div class='container'>
@@ -260,33 +229,23 @@
 
     <div class='container'>
         <div class='row'>
-            <ul class="collapsible col s12 m12" data-collapsible="accordion">
-                {% for cuisine in cuisine_results %}
-                    <li>
-                        <div class='collapsible-header'>
-                            <p>{{cuisine.recipe_name|title}}</p>
-                        </div>
-                        <div class="collapsible-body">
-                            <p>by {{cuisine.author_name|title}}</p>
-                            <p>{{cuisine.cuisine_name}}</p>
-                            <p>Ingredients:</p><br>
-                            {% for ingredient in cuisine.ingredient_name %} 
-                                <ul class="collection">
-                                    <li class="collection-item">{{ingredient}}{% if loop.index<loop.length %}, {% endif %}</li>
-                                </ul>
-                            {% endfor %}</p> 
-                            
-                            <p>Method:</p>
-                            {% for method in cuisine.recipe_method %}
-                                <ul class='collection'>
-                                    <li class='collection-item'>{{method}}</li>
-                                </ul>
-                            {% endfor %}
-                            <br>
-                        </div>
-                    </li>
-                {% endfor %}
-            </ul>
+            {% for recipe in cuisine_results %}
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            {% endfor %}
         </div>
     </div>
 {% endif %}
