@@ -90,6 +90,19 @@ a.brand-logo {
 	/*border: 10px solid black;*/
 }
 
+
+.permanent_recipes {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
+.delete_recipes {
+    text-align: center;
+    font-style: italic;
+    font-size: 20px;
+}
+
 .image_position {
 	display: inline-block;
 	position: relative;
