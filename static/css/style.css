@@ -109,6 +109,10 @@ a.brand-logo {
     font-size: 30px;
 }
 
+.search_recipe_link {
+    color: black;
+}
+
 /*------------------ media screen changes --------------------*/
 
 /*one needs to be changed*/
