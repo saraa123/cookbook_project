@@ -104,6 +104,11 @@ a.brand-logo {
 	justify-content: flex-end;
 }
 
+.checkmark {
+    color: green;
+    font-size: 30px;
+}
+
 /*------------------ media screen changes --------------------*/
 
 /*one needs to be changed*/
