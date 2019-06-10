@@ -18,7 +18,11 @@
             {{recipe.recipe_info|capitalize}}</p>
         </div>
         <div class='col s12 m6'>
-            <img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img>
+            {% if recipe.recipe_url %}
+            <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+            {% else %}
+            <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+            {% endif %}
         </div>
     </div>
     
