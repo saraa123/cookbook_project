@@ -40,6 +40,22 @@
             
             <div class="row">
                 <div class="input-field col s12">
+                    <select id="cuisine" name="cuisine_name">
+                      <option value="" disabled selected>Cuisine</option>
+                      {% for cuisine in cuisine %}
+                        {% if cuisine.cuisine_name == recipe.cuisine_name %}
+                            <option value="{{cuisine.cuisine_name}}" selected >{{cuisine.cuisine_name|title}}</option>
+                        {% else %}
+                            <option value="{{cuisine.cuisine_name}}">{{cuisine.cuisine_name|title}}</option>
+                        {% endif %}
+                      {% endfor %}
+                    </select>
+                    <label>Recipe Cuisine</label>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="input-field col s12">
                     <select id="special_requirement" name="special_requirement">
                       <option value="" disabled selected>Allergens</option>
                       {% for special in specialReq %}
@@ -90,14 +106,6 @@
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">subject</i>
-                    <textarea id="cuisine" name="cuisine_name" type="textarea" class="materialize-textarea">{{recipe.cuisine_name}}</textarea>
-                    <label for="cuisine">Recipe Cuisine</label> 
-                </div>
-            </div>
-            
-            <div class="row">
-                <div class="input-field col s12">
-                    <i class="material-icons prefix">subject</i>
                     <textarea id="author" name="author_name" type="textarea" class="materialize-textarea">{{recipe.author_name|title}}</textarea>
                     <label for="author">Recipe Author</label> 
                 </div>
@@ -120,9 +128,9 @@
             <input type="button" value="Add another ingredient" id="addIngredient"><br>
             <br>
             
-            <div id="dynamicInput">
+            <div id="dynamicInputMethod">
                 {% for method in recipe.recipe_method %}
-                Method {{ loop.index }}<br><input type="text" name="recipe_method" value="{{method}}">
+                Method {{ loop.index }}<br><input type="text" class="method" name="recipe_{{ loop.index }}_method" value="{{method}}">
                 {% endfor %}
             <br>
             </div>
