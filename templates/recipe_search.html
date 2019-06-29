@@ -100,19 +100,26 @@
         <div class='row'>
             {% for recipe in results %}
                 <div class='col s12 m6'>
+                    <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}" class='search_recipe_link'>
                     <p class='index_recipes'>
                     {{recipe.recipe_name|title}}<br>
                     {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    <br>
                     {% if recipe.special_requirement == None %}
                         
                     {% else %}
+                        <ion-icon class="checkmark" name="checkmark"></ion-icon>
                         {{recipe.special_requirement|title}}<br>
                     {% endif %}
-                    {{recipe.recipe_info|capitalize}}</p>
+                    {{recipe.recipe_info|capitalize}}</p></a>
                 </div>
                 
                 <div class='col s12 m6'>
-                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% if recipe.recipe_url %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% else %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -144,19 +151,25 @@
         <div class='row'>
             {% for recipe in category_results %}
                 <div class='col s12 m6'>
+                    <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}" class='search_recipe_link'>
                     <p class='index_recipes'>
                     {{recipe.recipe_name|title}}<br>
                     {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
                     {% if recipe.special_requirement == None %}
                         
                     {% else %}
+                        <ion-icon class="checkmark" name="checkmark"></ion-icon>
                         {{recipe.special_requirement|title}}<br>
                     {% endif %}
-                    {{recipe.recipe_info|capitalize}}</p>
+                    {{recipe.recipe_info|capitalize}}</p></a>
                 </div>
                 
                 <div class='col s12 m6'>
-                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% if recipe.recipe_url %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% else %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -187,19 +200,25 @@
         <div class='row'>
             {% for recipe in special_results %}
                 <div class='col s12 m6'>
+                    <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}" class='search_recipe_link'>
                     <p class='index_recipes'>
                     {{recipe.recipe_name|title}}<br>
                     {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
                     {% if recipe.special_requirement == None %}
                         
                     {% else %}
+                        <ion-icon class="checkmark" name="checkmark"></ion-icon>
                         {{recipe.special_requirement|title}}<br>
                     {% endif %}
-                    {{recipe.recipe_info|capitalize}}</p>
+                    {{recipe.recipe_info|capitalize}}</p></a>
                 </div>
                 
                 <div class='col s12 m6'>
-                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% if recipe.recipe_url %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% else %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
@@ -231,19 +250,25 @@
         <div class='row'>
             {% for recipe in cuisine_results %}
                 <div class='col s12 m6'>
+                    <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}" class='search_recipe_link'>
                     <p class='index_recipes'>
                     {{recipe.recipe_name|title}}<br>
                     {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
                     {% if recipe.special_requirement == None %}
                         
                     {% else %}
+                        <ion-icon class="checkmark" name="checkmark"></ion-icon>
                         {{recipe.special_requirement|title}}<br>
                     {% endif %}
-                    {{recipe.recipe_info|capitalize}}</p>
+                    {{recipe.recipe_info|capitalize}}</p></a>
                 </div>
                 
                 <div class='col s12 m6'>
-                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% if recipe.recipe_url %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                    {% else %}
+                        <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class="image_position responsive-img" src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+                    {% endif %}
                 </div>
             {% endfor %}
         </div>
