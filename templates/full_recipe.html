@@ -33,15 +33,21 @@
             
             {% for ing_name in recipe.ingredient_name %}
                 <ul class='collection'>
-                    <li class='collection-item'>{{ ing_name }}</li>
+                    <!--<li class='collection-item'>{{ ing_name }}</li>-->
+                    <li class='collection-item'>{{loop.index}}. {{ ing_name }}</li>
                 </ul>
             {% endfor %}
             
             <br>Recipe Method<br>
             {% for method in recipe.recipe_method %}
-            <ol class='collection'>
-                <li class='collection-item'>{{method}}</li>
-            </ol>
+                
+                <ol class='collection'>
+                    <!--<li class='collection-item'>{{method}}</li>-->
+                    <li class='collection-item'>{{loop.index}}, {{method}}</li>
+                    
+                </ol>
+                
+               
             {% endfor %}
         </div> 
     </div>
