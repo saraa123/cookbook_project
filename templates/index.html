@@ -1,0 +1,90 @@
+{% extends 'base.html' %} {% block content %} 
+
+
+<div class='container'>
+    <div class='row'>
+        <div class='col s12 m12 l12'>
+            <h3>Welcome to your online cookbook!</h3>
+            <p>View all your recipes in one place, with the highest rated automatically shown first. Search recipes to find exactly what you’re looking for.</p>
+        </div>
+    </div>
+</div>
+
+
+<div class='container'>
+    <div class='row'>
+        <div class='col s12 m12'>
+            {% if count == 0 %}
+                <p>No recipes available</p>
+            {% elif count == 1 %}
+                <p>{{count}} recipe available</p>
+            {% else %}
+                <p>You have a total of {{count}} recipes available</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!--------------- recipes that can't be deleted ----------------->
+
+
+<div class='container'>
+    <div class='row'>
+        <p class='recipe_heading'>Your permanent recipes</p>
+        {% for recipe in non_delete_recipe %}
+        
+            <div class='row'>
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            </div>
+             
+        {% endfor %}
+        
+    </div>
+</div>
+
+ <!------------- recipes that can be deleted ---------------->
+ 
+<div class='container'>
+    <div class='row'>
+        <p class='recipe_heading'>Recipes you're free to delete</p>
+        {% for recipe in delete_recipe %}
+            
+            <div class='row'>
+                <div class='col s12 m6'>
+                    <p class='index_recipes'>
+                    {{recipe.recipe_name|title}}<br>
+                    {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+                    {% if recipe.special_requirement == None %}
+                        
+                    {% else %}
+                        {{recipe.special_requirement|title}}<br>
+                    {% endif %}
+                    {{recipe.recipe_info|capitalize}}</p>
+                </div>
+                
+                <div class='col s12 m6'>
+                    <a href ="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+                </div>
+            </div>
+            
+        {% endfor %}
+    </div>
+</div>
+
+
+{% endblock %}
+

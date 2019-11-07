@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class='container wide_container'>
+    <h3>{{recipe.recipe_name|title}}</h3>
+    <div class='row'>
+        <div class='col s12 m6'>
+            <p class='index_recipes'>
+            by {{recipe.author_name|title}}<br>
+            {{recipe.rating}}<ion-icon name="star" id='star'></ion-icon><br>
+            
+            {% if recipe.special_requirement == None %}
+                
+            {% else %}
+                {{recipe.special_requirement|title}}<br>
+            {% endif %}
+            <br>
+            {{recipe.recipe_info|capitalize}}</p>
+        </div>
+        <div class='col s12 m6'>
+            {% if recipe.recipe_url %}
+            <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img class='image_position' src="{{recipe.recipe_url}}" height='200' width='200' alt='food image'></img></a>
+            {% else %}
+            <a href="{{url_for('full_recipe', recipe_id=recipe._id)}}"><img src="https://www.buzzle.com/templates/cookbook/cookbook-cover.jpg" height='200' width='250'></img></a>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col s12">
+                        
+            <br>Ingredients<br>
+            
+            {% for ing_name in recipe.ingredient_name %}
+                <ul class='collection'>
+                    <!--<li class='collection-item'>{{ ing_name }}</li>-->
+                    <li class='collection-item'>{{loop.index}}. {{ ing_name }}</li>
+                </ul>
+            {% endfor %}
+            
+            <br>Recipe Method<br>
+            {% for method in recipe.recipe_method %}
+                
+                <ol class='collection'>
+                    <!--<li class='collection-item'>{{method}}</li>-->
+                    <li class='collection-item'>{{loop.index}}, {{method}}</li>
+                    
+                </ol>
+                
+               
+            {% endfor %}
+        </div> 
+    </div>
+    
+    <div>
+        {% if recipe.delete_recipe == 'false' %}
+            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">edit</a>
+        {% else %}
+            <a href ="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">delete</a>
+            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-small">edit</a>
+        {% endif %}
+    </div>
+        
+</div>
+<br>
+{% endblock %}
